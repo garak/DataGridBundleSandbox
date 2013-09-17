@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/bundles/acmedemo/css/grid.css"  rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block title %}grid index{% endblock %}
+
+{% block body -%}
+    <h1>Book list</h1>
+
+    {{ grid(grid) }}
+
+{% endblock %}

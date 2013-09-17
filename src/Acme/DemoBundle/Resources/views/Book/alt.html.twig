@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}alternate index{% endblock %}
+
+{% block body -%}
+    <h1>Book list</h1>
+
+    <table>
+        <thed>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Authors</th>
+            </tr>
+        </thed>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.authors|join(', ') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
+{% endblock %}
