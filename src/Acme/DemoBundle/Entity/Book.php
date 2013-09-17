@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="book")
  * @ORM\Entity
- * #GRID\Source(columns="authors.id, authors.name, authors.id:count:distinct", groupBy={"authors.name"})
- * @GRID\Source(columns="id, title, authors.name:GroupConcat, authors.id:count:distinct", groupBy={"id"})
+ * #GRID\Source(columns="authors.id, authors.name", groupBy={"authors.name"})
+ * @GRID\Source(columns="id, title, authors.name", groupBy={"id"})
  */
 class Book
 {
@@ -39,8 +39,7 @@ class Book
      *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="cascade")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="cascade")}
      * )
-     * @GRID\Column(field="authors.id:count:distinct", title="Count", filterable=false)
-     * @GRID\Column(field="authors.name:GroupConcat", title="Authors")
+     * @GRID\Column(field="authors.name", title="Authors")
      */
     protected $authors;
 

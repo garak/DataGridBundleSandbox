@@ -32,6 +32,17 @@ class BookController extends Controller
         $grid->setDefaultOrder('id', 'asc');
         $grid->setId('materia');
 
+        $grid->getColumn('authors.name')->manipulateRenderCell(
+            function($value, $row, $router) {
+                $authors = [];
+                foreach ($row->getEntity()->getAuthors() as $author) {
+                    $authors[] = $author->getName();
+                }
+
+                return join(', ', $authors);
+            }
+        );
+
         return $grid->getGridResponse();
     }
 
