@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="book")
  * @ORM\Entity
  * #GRID\Source(columns="authors.id, authors.name, authors.id:count:distinct", groupBy={"authors.name"})
- * @GRID\Source(columns="id, title, authors.id:count:distinct, authors.name", groupBy={"authors.name"})
+ * @GRID\Source(columns="id, title, authors.name:GroupConcat, authors.id:count:distinct", groupBy={"id"})
  */
 class Book
 {
@@ -32,7 +32,7 @@ class Book
      * #GRID\Column(field="book.title", title="Title")
      */
     protected $title;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Author", inversedBy="books")
      * @ORM\JoinTable(name="book_author",
@@ -40,14 +40,14 @@ class Book
      *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="cascade")}
      * )
      * @GRID\Column(field="authors.id:count:distinct", title="Count", filterable=false)
-     * @GRID\Column(field="authors.name", title="Author")
+     * @GRID\Column(field="authors.name:GroupConcat", title="Authors")
      */
     protected $authors;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,14 +63,14 @@ class Book
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -83,7 +83,7 @@ class Book
     {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add author
      *
@@ -93,7 +93,7 @@ class Book
     public function addAuthor(Author $author)
     {
         $this->authors[] = $author;
-    
+
         return $this;
     }
 
@@ -110,7 +110,7 @@ class Book
     /**
      * Get authors
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getAuthors()
     {

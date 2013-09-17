@@ -21,18 +21,17 @@ class BookController extends Controller
      * Lists all Book entities.
      *
      * @Route("/", name="book")
-     * @Method("GET")
+     * -Method("GET")
      * @Template()
      */
     public function indexAction()
     {
-        $qb = $this->getDoctrine()->getRepository('AcmeDemoBundle:Book')->createQueryBuilder('b')->orderBY('b.id');
         $source = new GridEntity('AcmeDemoBundle:Book');
-        $source->initQueryBuilder($qb);
         $grid = $this->get('grid');
         $grid->setSource($source);
+        $grid->setDefaultOrder('id', 'asc');
         $grid->setId('materia');
-        
+
         return $grid->getGridResponse();
     }
 
@@ -46,10 +45,10 @@ class BookController extends Controller
     public function altAction()
     {
         $books = $this->getDoctrine()->getRepository('AcmeDemoBundle:Book')->findAll();
-        
+
         return compact('books');
     }
-    
+
     /**
      * Finds and displays a Book entity.
      *
