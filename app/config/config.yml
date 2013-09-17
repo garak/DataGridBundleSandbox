@@ -55,13 +55,7 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
-        entity_managers:
-            default:
-                mappings:
-                    AcmeDemoBundle: ~
-                dql:
-                    string_functions:
-                        GroupConcat: Acme\DemoBundle\GroupConcat
+        auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:
