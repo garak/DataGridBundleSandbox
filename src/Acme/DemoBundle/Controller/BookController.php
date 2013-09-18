@@ -28,20 +28,19 @@ class BookController extends Controller
     {
         $source = new GridEntity('AcmeDemoBundle:Book');
         $grid = $this->get('grid');
-        $grid->setSource($source);
-        $grid->setDefaultOrder('id', 'asc');
-        $grid->setId('materia');
-
-        $grid->getColumn('authors.name')->manipulateRenderCell(
-            function($value, $row, $router) {
-                $authors = [];
-                foreach ($row->getEntity()->getAuthors() as $author) {
-                    $authors[] = $author->getName();
+        $grid
+            ->setSource($source)
+            ->setDefaultOrder('id', 'asc')
+            ->getColumn('authors.name')->manipulateRenderCell(
+                function($value, $row, $router) {
+                    $authors = [];
+                    foreach ($row->getEntity()->getAuthors() as $author) {
+                        $authors[] = $author->getName();
+                    }
+    
+                    return implode(', ', $authors);
                 }
-
-                return join(', ', $authors);
-            }
-        );
+            );
 
         return $grid->getGridResponse();
     }
