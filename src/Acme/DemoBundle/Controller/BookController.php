@@ -21,11 +21,12 @@ class BookController extends Controller
      * Lists all Book entities.
      *
      * @Route("/", name="book")
-     * -Method("GET")
      * @Template()
      */
     public function indexAction()
     {
+        $authors = $this->getDoctrine()->getRepository('AcmeDemoBundle:Author')->findAll();
+        
         $source = new GridEntity('AcmeDemoBundle:Book');
         $grid = $this->get('grid');
         $grid
@@ -40,7 +41,7 @@ class BookController extends Controller
     
                     return implode(', ', $authors);
                 }
-            );
+            )->setValues(array_combine($authors, $authors));
 
         return $grid->getGridResponse();
     }

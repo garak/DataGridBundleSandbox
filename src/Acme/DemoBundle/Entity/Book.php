@@ -39,7 +39,7 @@ class Book
      *     joinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="cascade")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="cascade")}
      * )
-     * @GRID\Column(field="authors.name", title="Authors", filter="select", selectMulti="true", selectFrom="source")
+     * @GRID\Column(field="authors.name", title="Authors", filter="select", selectMulti="true", selectFrom="values")
      */
     protected $authors;
 
